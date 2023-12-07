@@ -16,7 +16,7 @@ export function AsideMenuMain() {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='/strategy/my-strategy'
         icon='/media/icons/duotune/general/tsunami.svg'
         title='My Strategy'
@@ -39,7 +39,7 @@ export function AsideMenuMain() {
         icon='/media/icons/duotune/general/gear.svg'
         title='Account Setting'
         fontIcon='bi-layers'
-      />
+      /> */}
 
       
       {/* <AsideMenuItemWithSub
