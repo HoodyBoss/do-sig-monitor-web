@@ -1,0 +1,43 @@
+import React, {Suspense, lazy} from 'react'
+import {Redirect, Route, Switch} from 'react-router-dom'
+import {FallbackView} from '../../_metronic/partials'
+import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
+import {MenuTestPage} from '../pages/MenuTestPage'
+import {MyStrategy} from "../pages/dashboard/MyStrategy";
+import {StrategyPool} from "../pages/strategy/StrategyPool";
+import {StrategyDetail} from "../pages/strategy/StrategyDetail";
+import {ExchangeSetup} from "../pages/setup/ExchangeSetup";
+
+export function PrivateRoutes() {
+  const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
+  const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
+  const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
+  const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
+  const MasterAccountPage = lazy(() => import('../modules/mastersetup/MasterAccountPage'))
+  const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
+  const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
+
+  return (
+    <Suspense fallback={<FallbackView />}>
+      <Switch>
+        <Route path='/dashboard' component={DashboardWrapper} />
+        <Route path='/builder' component={BuilderPageWrapper} />
+        <Route path="/strategy/my-strategy" component={MyStrategy} />
+        <Route path="/strategy/my-strategies/:action" component={MyStrategy} />
+        <Route path="/strategy/strategy_pool" component={StrategyPool} />
+        <Route path="/strategy/strategy_detail" component={StrategyDetail} />
+        <Route path="/setup/exchange_setup" component={ExchangeSetup} />
+        <Route path='/crafted/pages/profile' component={ProfilePage} />
+        <Route path='/crafted/pages/wizards' component={WizardsPage} />
+        <Route path='/crafted/widgets' component={WidgetsPage} />
+        <Route path='/crafted/account' component={AccountPage} />
+        <Route path='/account' component={MasterAccountPage} />
+        <Route path='/apps/chat' component={ChatPage} />
+        <Route path='/menu-test' component={MenuTestPage} />
+        <Redirect from='/auth' to='/dashboard' />
+        <Redirect exact from='/' to='/dashboard' />
+        <Redirect to='error/404' />
+      </Switch>
+    </Suspense>
+  )
+}

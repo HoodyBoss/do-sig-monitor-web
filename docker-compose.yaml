@@ -1,0 +1,37 @@
+version: '3.8'
+
+x-common-variables: &common-variables
+  GCP_PROJECT: pub-deepocean-dev
+
+services:
+
+  # firebase_emulator:
+  #   image: "deepocean/firebaseemu"
+  #   restart: always
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile-firebase
+  #   ports:
+  #     - "9000:9000"
+  #     - "8080:8080"
+  #     - "4000:4000"
+  #     - "9099:9099"
+  #     - "8085:8085"
+  #     - "5001:5001"
+  #     - "9199:9199"
+  #   environment:
+  #     <<: *common-variables
+  #     ENABLE_UI: 'true'
+  #     GOOGLE_APPLICATION_CREDENTIALS: ./app/gcp_auth_key.json
+  #   volumes:
+  #     - "./firebaseemu_config:/firebase"
+
+  do-portfolio-sim:
+    stdin_open: true
+    image: "deepocean/portfolio-sim"
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-website
+    ports:
+      - "3011:3000"
